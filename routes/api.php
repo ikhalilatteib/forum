@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\PassportAuthController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,13 +27,26 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('/logout', [PassportAuthController::class, 'logout']);
 
+    /**
+     *   Tag route group
+     */
+
+    Route::resources(['tags' => TagController::class]);
+
+    /**
+     * Question route group
+     */
+
+    Route::controller(QuestionController::class)->group(function (){
+        Route::post('/question/save','storeQuestion')->name('store.question');
+    });
 
 });
 
 
 /*
 |  Login and register post method
- */
+*/
 
 Route::controller(PassportAuthController::class)->group(function () {
     Route::post('/register', 'register');

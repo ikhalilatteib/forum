@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\User;
+use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,13 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('answer_question', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->longText('content');
-            $table->boolean('is_active')->default(1);
-            $table->foreignIdFor(User::class,'user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreignIdFor(Answer::class,'answer_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignIdFor(Question::class,'question_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('answer_question');
     }
 };
