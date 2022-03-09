@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\Auth\PassportAuthController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TagController;
@@ -37,10 +38,20 @@ Route::middleware('auth:api')->group(function () {
      * Question route group
      */
 
-    Route::controller(QuestionController::class)->group(function (){
-        Route::post('/question/save','storeQuestion')->name('store.question');
+    Route::controller(QuestionController::class)->prefix('question')->group(function () {
+        Route::get('/index', 'indexQuestion')->name('index.question');
+        Route::post('/save', 'storeQuestion')->name('store.question');
+        Route::put('/{question}/update', 'updateQuestion')->name('update.question');
+        Route::delete('/{question}/delete', 'deleteQuestion')->name('delete.question');
     });
 
+    /**
+     * Answer route group
+     */
+
+    Route::controller(AnswerController::class)->group(function () {
+        Route::post('/answer/{question}/store', 'storeAnswer')->name('answer.question.store');
+    });
 });
 
 

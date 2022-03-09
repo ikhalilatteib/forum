@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->id();
             $table->longText('content');
             $table->boolean('is_best')->default(0);
+            $table->foreignIdFor(Question::class,'question_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignIdFor(User::class,'user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

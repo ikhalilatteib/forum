@@ -4,22 +4,24 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuestionRequest extends FormRequest
+class AnswerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
      * @return bool
      */
-
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
 
     protected function prepareForValidation()
     {
+        $question = $this->route('question');
         $this->merge([
-            'user_id'=>$this->user()->id
+            'user_id' => $this->user()->id,
+            'question_id'=>$question->id,
         ]);
     }
 
@@ -28,13 +30,12 @@ class QuestionRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() : array
+    public function rules()
     {
         return [
-            'title'=>'required|string',
-            'content'=>'required|string|min:100',
-            'tags'=>'required|array',
-            'user_id'=>'required|exists:users,id'
+            'content' => 'required|string|min:10',
+            'user_id' => 'required|exists:users,id',
+            'question_id'=>'required|exists:questions,id'
         ];
     }
 }
