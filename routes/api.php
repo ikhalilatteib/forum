@@ -41,8 +41,9 @@ Route::middleware('auth:api')->group(function () {
     Route::controller(QuestionController::class)->prefix('question')->group(function () {
         Route::get('/index', 'indexQuestion')->name('index.question');
         Route::post('/save', 'storeQuestion')->name('store.question');
-        Route::put('/{question}/update', 'updateQuestion')->name('update.question');
-        Route::delete('/{question}/delete', 'deleteQuestion')->name('delete.question');
+        Route::get('/{question:slug}', 'showQuestion')->name('show.question');
+        Route::put('/{question:slug}/update', 'updateQuestion')->name('update.question');
+        Route::delete('/{question:slug}/delete', 'deleteQuestion')->name('delete.question');
     });
 
     /**
@@ -50,7 +51,7 @@ Route::middleware('auth:api')->group(function () {
      */
 
     Route::controller(AnswerController::class)->group(function () {
-        Route::post('/answer/{question}/store', 'storeAnswer')->name('answer.question.store');
+        Route::post('/answer/{question:slug}/store', 'storeAnswer')->name('answer.question.store');
     });
 });
 

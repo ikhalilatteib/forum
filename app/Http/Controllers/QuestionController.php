@@ -5,14 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Requests\QuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Question;
+use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
+
+    /**
+     * @var QuestionRepository
+     */
+
+    public function __construct(private QuestionRepository $questionRepository)
+    {
+    }
+
     public function indexQuestion()
     {
-        $questions = Question::with( 'answers', 'tags')->get();
+        $questions = $this->questionRepository->index();
         return response([
             'questions' => $questions
         ]);
@@ -30,6 +40,11 @@ class QuestionController extends Controller
         return response()->json([
             'question' => $question
         ], 200);
+    }
+
+    public function showQuestion(Question $question)
+    {
+        return $this->questionRepository->singleQuestion($question);
     }
 
     public function updateQuestion(UpdateQuestionRequest $request, Question $question)
