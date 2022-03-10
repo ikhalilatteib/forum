@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\QuestionRequest;
-use App\Http\Requests\UpdateQuestionRequest;
+use App\Http\Requests\QuestionUpdateRequest;
 use App\Models\Question;
 use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
@@ -47,7 +47,7 @@ class QuestionController extends Controller
         return $this->questionRepository->singleQuestion($question);
     }
 
-    public function updateQuestion(UpdateQuestionRequest $request, Question $question)
+    public function updateQuestion(QuestionUpdateRequest $request, Question $question)
     {
         $response = DB::transaction(function () use ($request, $question) {
             $question->update($request->validated());

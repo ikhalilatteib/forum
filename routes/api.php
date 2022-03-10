@@ -52,6 +52,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::controller(AnswerController::class)->group(function () {
         Route::post('/answer/{question:slug}/store', 'storeAnswer')->name('answer.question.store');
+        Route::put('/answer/{answer}/update', 'updateAnswer')->name('answer.question.update');
+        Route::delete('/answer/{answer}/delete', 'deleteAnswer')->name('answer.question.delete');
     });
 });
 

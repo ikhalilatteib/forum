@@ -4,17 +4,18 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateQuestionRequest extends FormRequest
+class AnswerUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
-        $question = $this->route('question');
-        if($this->user()->id!==$question->user_id){
+
+        $answer = $this->route('answer');
+        if ($this->user()->id !== $answer->user_id) {
             return false;
         }
         return true;
@@ -25,12 +26,10 @@ class UpdateQuestionRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'title'=>'required|string',
-            'content'=>'required|string|min:100',
-            'tags'=>'required|array',
+            'content' => 'required|string|min:10',
         ];
     }
 }
