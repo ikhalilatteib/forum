@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\DB;
 class AnswerController extends Controller
 {
 
+    public function indexAnswer()
+    {
+        $answers =  auth()->user()->answers;
+        return response([
+            'answers' => $answers
+        ]);
+    }
+
     public function storeAnswer(AnswerRequest $request, Question $question)
     {
         $response = DB::transaction(function () use ($request, $question) {
@@ -29,9 +37,10 @@ class AnswerController extends Controller
         return response(['update' => $response]);
     }
 
-    public function deleteAnswer(Answer $answer,Request $request){
-       abort_if($request->user()->id!==$answer->user_id,404);
-       $answer->delete();
-       return response(['success'=>'true']);
+    public function deleteAnswer(Answer $answer, Request $request)
+    {
+        abort_if($request->user()->id !== $answer->user_id, 404);
+        $answer->delete();
+        return response(['success' => 'true']);
     }
 }
