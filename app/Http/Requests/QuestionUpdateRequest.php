@@ -14,10 +14,7 @@ class QuestionUpdateRequest extends FormRequest
     public function authorize(): bool
     {
         $question = $this->route('question');
-        if($this->user()->id!==$question->user_id){
-            return false;
-        }
-        return true;
+        return $this->user()->id === $question->user_id;
     }
 
     /**
@@ -25,12 +22,12 @@ class QuestionUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'title'=>'required|string',
             'content'=>'required|string|min:100',
-            'tags'=>'required|array',
+            'tag_id'=>'required|exists:tags,id',
         ];
     }
 }

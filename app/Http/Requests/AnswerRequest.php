@@ -16,7 +16,7 @@ class AnswerRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $question = $this->route('question');
         $this->merge([

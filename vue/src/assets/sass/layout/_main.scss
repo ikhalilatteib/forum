@@ -25,7 +25,7 @@ body {
 		transition: padding-left get($aside-config, transition-speed) ease,  margin-right get($aside-config, transition-speed) ease;
 
 		// Aside default enabled and aside fixed modes
-		.aside-enabled[data-kt-sticky-aside-sticky="on"] & {
+		.aside-enabled[data-kt-sticky-aside-sticky="off"] & {
 			transition: padding-left get($aside-config, transition-speed) ease;
 			padding-left: get($aside-config, width);
 		}
