@@ -33,7 +33,7 @@ class QuestionRequest extends FormRequest
         return [
             'title'=>'required|string',
             'content'=>'required|string|min:100',
-            'tags'=>'required|array',
+            'tag_id'=>'required|exists:tags,id',
             'user_id'=>'required|exists:users,id'
         ];
     }

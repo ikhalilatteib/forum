@@ -1,5 +1,5 @@
 <template>
-    <div class="post" id="kt_post">
+    <div class="post " id="kt_post">
         <questioncard />
     </div>
 </template>

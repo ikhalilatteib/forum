@@ -2,19 +2,20 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use Illuminate\Database\Eloquent\Collection;
 
 class QuestionRepository
 {
 
-    public function index(): Collection|array
+    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-      return  Question::with( 'answers', 'tags')->latest()->get();
+      return  QuestionResource::collection(Question::query()->latest()->get());
     }
 
     public function singleQuestion($question)
     {
-        return $question->with('tags','answers','user')->get();
+        return $question->query()->get();
     }
 }

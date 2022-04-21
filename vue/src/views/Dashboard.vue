@@ -4,9 +4,9 @@
         <div class="page-title d-flex flex-column py-1">
             <!--begin::Title-->
             <h1 class="d-flex align-items-center my-1">
-                <span class="text-dark fw-bolder fs-1">All Questions</span>
+                <span class="text-dark fw-bolder fs-1">Tüm Sorular</span>
                 <!--begin::Description-->
-                <small class="text-muted fs-6 fw-bold ms-1">(6,299)</small>
+                <small class="text-muted fs-6 fw-bold ms-1">(0)</small>
                 <!--end::Description-->
             </h1>
             <!--end::Title-->
@@ -15,7 +15,7 @@
         <!--begin::Actions-->
         <div class="d-flex align-items-center py-1">
             <!--begin::Button-->
-            <a href="../../demo5/dist/apps/devs/ask.html" class="btn btn-flex btn-sm btn-primary fw-bolder border-0 fs-6 h-40px" id="kt_toolbar_primary_button">Ask Question</a>
+            <router-link :to="{name : 'AddQuestion'}" class="btn btn-flex btn-sm btn-primary fw-bolder border-0 fs-6 h-40px" id="kt_toolbar_primary_button">Soru Sor</router-link>
             <!--end::Button-->
         </div>
         <!--end::Actions-->

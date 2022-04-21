@@ -4,13 +4,15 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import AuthLayout from "../components/AuthLayout.vue";
 import DefaultLayout from "../components/DefaultLayout.vue";
-import store from '../store'
+import store from '../store';
+import AddQuestion from '../views/AddQuestion.vue'
 
 const routes = [{
-    path: '/', redirect: '/dashboard', 
-
+    path: '/', redirect: '/dashboard',
     component: DefaultLayout, children: [{
         path: '/dashboard', name: 'Dashboard', component: Dashboard,
+    }, {
+        path: '/add-question', name: 'AddQuestion', component: AddQuestion, meta: { requiresAuth: true }
     }]
 }, {
     path: '/auth', redirect: '/login', component: AuthLayout, children: [{

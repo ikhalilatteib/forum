@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\QuestionRequest;
 use App\Http\Requests\QuestionUpdateRequest;
+use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
@@ -30,16 +31,11 @@ class QuestionController extends Controller
 
     public function storeQuestion(QuestionRequest $request)
     {
-        $question = DB::transaction(function () use ($request) {
-            $question = auth()->user()->questions()->create($request->validated());
-            $question->tags()->attach($request->get('tags'));
 
-            return $question;
-        });
-
-        return response()->json([
-            'question' => $question
-        ], 200);
+        $question = auth()->user()->questions()->create($request->validated());
+        return response([
+        'questions' => $question
+    ]);
     }
 
     public function showQuestion(Question $question)
@@ -59,7 +55,7 @@ class QuestionController extends Controller
         ]);
     }
 
-    public function deleteQuestion(Question $question,Request $request)
+    public function deleteQuestion(Question $question, Request $request)
     {
         $user = $request->user();
         if ($user->id !== $question->user_id) {
@@ -67,6 +63,6 @@ class QuestionController extends Controller
         }
         $question->delete();
 
-        return response('',204);
+        return response('', 204);
     }
 }

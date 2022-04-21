@@ -28,12 +28,12 @@
                             </div>
                             <!--end::Aside mobile toggle-->
                             <!--begin::Logo-->
-                            <a href="../../demo5/dist/index.html">
+                            <router-link :to="{name:'Dashboard'}">
                                 <img alt="Logo" src="../assets/media/logos/logo-demo5.svg"
                                     class="d-none d-lg-inline h-30px" />
                                 <img alt="Logo" src="../assets/media/logos/logo-demo5-mobile.svg"
                                     class="d-lg-none h-25px" />
-                            </a>
+                            </router-link>
                             <!--end::Logo-->
                         </div>
                         <!--end::Brand-->
@@ -441,8 +441,8 @@
                                         <!--begin::Name-->
                                         <div
                                             class="d-none d-md-flex flex-column align-items-end justify-content-center me-2">
-                                            <span class="text-muted fs-7 fw-bold lh-1 mb-2">Hello</span>
-                                            <span class="text-dark fs-base fw-bolder lh-1">Richard</span>
+                                            <span class="text-muted fs-7 fw-bold lh-1 mb-2">Merhaba</span>
+                                            <span class="text-dark fs-base fw-bolder lh-1">Khalil</span>
                                         </div>
                                         <!--end::Name-->
                                         <!--begin::Symbol-->
@@ -465,12 +465,12 @@
                                                 <!--end::Avatar-->
                                                 <!--begin::Username-->
                                                 <div class="d-flex flex-column">
-                                                    <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
+                                                    <div class="fw-bolder d-flex align-items-center fs-5">Ibrahim Khalil
                                                         <span
                                                             class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
                                                     </div>
                                                     <a href="#"
-                                                        class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                                        class="fw-bold text-muted text-hover-primary fs-7">i.khalilatteib@gmail.com</a>
                                                 </div>
                                                 <!--end::Username-->
                                             </div>
@@ -481,183 +481,16 @@
                                         <!--end::Menu separator-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
-                                            <a href="../assets/media/avatars/150-2.jpg" class="menu-link px-5">My
-                                                Profile</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5">
-                                            <a href="../assets/media/avatars/150-2.jpg" class="menu-link px-5">
-                                                <span class="menu-text">My Projects</span>
-                                                <span class="menu-badge">
-                                                    <span
-                                                        class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5" data-kt-menu-trigger="hover"
-                                            data-kt-menu-placement="left-start">
-                                            <a href="#" class="menu-link px-5">
-                                                <span class="menu-title">My Subscription</span>
-                                                <span class="menu-arrow"></span>
-                                            </a>
-                                            <!--begin::Menu sub-->
-                                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="../../demo5/dist/account/referrals.html"
-                                                        class="menu-link px-5">Referrals</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="../../demo5/dist/account/billing.html"
-                                                        class="menu-link px-5">Billing</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="../../demo5/dist/account/statements.html"
-                                                        class="menu-link px-5">Payments</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="../../demo5/dist/account/statements.html"
-                                                        class="menu-link d-flex flex-stack px-5">Statements
-                                                        <i class="fas fa-exclamation-circle ms-2 fs-7"
-                                                            data-bs-toggle="tooltip"
-                                                            title="View your statements"></i></a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu separator-->
-                                                <div class="separator my-2"></div>
-                                                <!--end::Menu separator-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <div class="menu-content px-3">
-                                                        <label
-                                                            class="form-check form-switch form-check-custom form-check-solid">
-                                                            <input class="form-check-input w-30px h-20px"
-                                                                type="checkbox" value="1" checked="checked"
-                                                                name="notifications" />
-                                                            <span
-                                                                class="form-check-label text-muted fs-7">Notifications</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <!--end::Menu item-->
-                                            </div>
-                                            <!--end::Menu sub-->
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5">
-                                            <a href="../assets/media/avatars/150-2.jpg" class="menu-link px-5">My
-                                                Statements</a>
+                                            <a href="../assets/media/avatars/150-2.jpg" class="menu-link px-5">Hesabım</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu separator-->
                                         <div class="separator my-2"></div>
                                         <!--end::Menu separator-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5" data-kt-menu-trigger="hover"
-                                            data-kt-menu-placement="left-start">
-                                            <a href="#" class="menu-link px-5">
-                                                <span class="menu-title position-relative">Language
-                                                    <span
-                                                        class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-                                                        <img class="w-15px h-15px rounded-1 ms-2"
-                                                            src="assets/media/flags/united-states.svg"
-                                                            alt="" /></span></span>
-                                            </a>
-                                            <!--begin::Menu sub-->
-                                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="../../demo5/dist/account/settings.html"
-                                                        class="menu-link d-flex px-5 active">
-                                                        <span class="symbol symbol-20px me-4">
-                                                            <img class="rounded-1"
-                                                                src="assets/media/flags/united-states.svg" alt="" />
-                                                        </span>English</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="../../demo5/dist/account/settings.html"
-                                                        class="menu-link d-flex px-5">
-                                                        <span class="symbol symbol-20px me-4">
-                                                            <img class="rounded-1" src="assets/media/flags/spain.svg"
-                                                                alt="" />
-                                                        </span>Spanish</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="../../demo5/dist/account/settings.html"
-                                                        class="menu-link d-flex px-5">
-                                                        <span class="symbol symbol-20px me-4">
-                                                            <img class="rounded-1" src="assets/media/flags/germany.svg"
-                                                                alt="" />
-                                                        </span>German</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="../../demo5/dist/account/settings.html"
-                                                        class="menu-link d-flex px-5">
-                                                        <span class="symbol symbol-20px me-4">
-                                                            <img class="rounded-1" src="assets/media/flags/japan.svg"
-                                                                alt="" />
-                                                        </span>Japanese</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="../../demo5/dist/account/settings.html"
-                                                        class="menu-link d-flex px-5">
-                                                        <span class="symbol symbol-20px me-4">
-                                                            <img class="rounded-1" src="assets/media/flags/france.svg"
-                                                                alt="" />
-                                                        </span>French</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                            </div>
-                                            <!--end::Menu sub-->
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5 my-1">
-                                            <a href="../../demo5/dist/account/settings.html"
-                                                class="menu-link px-5">Account
-                                                Settings</a>
-                                        </div>
-                                        <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
                                             <a href="../../demo5/dist/authentication/flows/basic/sign-in.html"
-                                                class="menu-link px-5">Sign Out</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu separator-->
-                                        <div class="separator my-2"></div>
-                                        <!--end::Menu separator-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5">
-                                            <div class="menu-content px-5">
-                                                <label
-                                                    class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"
-                                                    for="kt_user_menu_dark_mode_toggle">
-                                                    <input class="form-check-input w-30px h-20px" type="checkbox"
-                                                        value="1" name="mode" id="kt_user_menu_dark_mode_toggle"
-                                                        data-kt-url="../../demo5/dist/index.html" />
-                                                    <span class="pulse-ring ms-n1"></span>
-                                                    <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
-                                                </label>
-                                            </div>
+                                                class="menu-link px-5">Çıkış Yap</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -718,7 +551,7 @@
                             <div class="text-dark order-2 order-md-1">
                                 <span class="text-muted fw-bold me-1">2022©</span>
                                 <a href="https://keenthemes.com" target="_blank"
-                                    class="text-gray-800 text-hover-primary">Keenthemes</a>
+                                    class="text-gray-800 text-hover-primary">Calisma Tasarımı</a>
                             </div>
                             <!--end::Copyright-->
                         </div>
@@ -753,140 +586,11 @@
                             <!--end::Icon-->
                             <!--begin::Input-->
                             <input type="text" class="form-control bg-transparent ps-13 fs-7 h-40px" name="search"
-                                value="" placeholder="Search" />
+                                value="" placeholder="Ara" />
                             <!--end::Input-->
                         </form>
                         <!--end::Quick Search-->
-                        <!--begin::Popular Questions-->
-                        <div class="card bg-light mb-5 mb-lg-10 shadow-none border-0">
-                            <!--begin::Header-->
-                            <div class="card-header align-items-center border-0">
-                                <!--begin::Title-->
-                                <h3 class="card-title fw-bolder text-gray-900 fs-3">Popular Questions</h3>
-                                <!--end::Title-->
-                            </div>
-                            <!--end::Header-->
-                            <!--begin::Body-->
-                            <div class="card-body pt-0">
-                                <!--begin::Item-->
-                                <div class="d-flex mb-5">
-                                    <!--begin::Arrow-->
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen057.svg-->
-                                    <span class="svg-icon svg-icon-2 mt-0 me-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
-                                                fill="currentColor" />
-                                            <path
-                                                d="M11.9343 12.5657L9.53696 14.963C9.22669 15.2733 9.18488 15.7619 9.43792 16.1204C9.7616 16.5789 10.4211 16.6334 10.8156 16.2342L14.3054 12.7029C14.6903 12.3134 14.6903 11.6866 14.3054 11.2971L10.8156 7.76582C10.4211 7.3666 9.7616 7.42107 9.43792 7.87962C9.18488 8.23809 9.22669 8.72669 9.53696 9.03696L11.9343 11.4343C12.2467 11.7467 12.2467 12.2533 11.9343 12.5657Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                    <!--end::Arrow-->
-                                    <!--begin::Title-->
-                                    <a href="../../demo5/dist/apps/devs/question.html"
-                                        class="text-gray-700 text-hover-primary fs-6 fw-bold">How to use Metrponic with
-                                        Django Framework ?</a>
-                                    <!--end::Title-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="d-flex mb-5">
-                                    <!--begin::Arrow-->
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen057.svg-->
-                                    <span class="svg-icon svg-icon-2 mt-0 me-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
-                                                fill="currentColor" />
-                                            <path
-                                                d="M11.9343 12.5657L9.53696 14.963C9.22669 15.2733 9.18488 15.7619 9.43792 16.1204C9.7616 16.5789 10.4211 16.6334 10.8156 16.2342L14.3054 12.7029C14.6903 12.3134 14.6903 11.6866 14.3054 11.2971L10.8156 7.76582C10.4211 7.3666 9.7616 7.42107 9.43792 7.87962C9.18488 8.23809 9.22669 8.72669 9.53696 9.03696L11.9343 11.4343C12.2467 11.7467 12.2467 12.2533 11.9343 12.5657Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                    <!--end::Arrow-->
-                                    <!--begin::Title-->
-                                    <a href="../../demo5/dist/apps/devs/question.html"
-                                        class="text-gray-700 text-hover-primary fs-6 fw-bold">When to expect new version
-                                        of Metronic Laravel ?</a>
-                                    <!--end::Title-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="d-flex mb-5">
-                                    <!--begin::Arrow-->
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen057.svg-->
-                                    <span class="svg-icon svg-icon-2 mt-0 me-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
-                                                fill="currentColor" />
-                                            <path
-                                                d="M11.9343 12.5657L9.53696 14.963C9.22669 15.2733 9.18488 15.7619 9.43792 16.1204C9.7616 16.5789 10.4211 16.6334 10.8156 16.2342L14.3054 12.7029C14.6903 12.3134 14.6903 11.6866 14.3054 11.2971L10.8156 7.76582C10.4211 7.3666 9.7616 7.42107 9.43792 7.87962C9.18488 8.23809 9.22669 8.72669 9.53696 9.03696L11.9343 11.4343C12.2467 11.7467 12.2467 12.2533 11.9343 12.5657Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                    <!--end::Arrow-->
-                                    <!--begin::Title-->
-                                    <a href="../../demo5/dist/apps/devs/question.html"
-                                        class="text-gray-700 text-hover-primary fs-6 fw-bold">Could not get Metronic
-                                        Demo
-                                        7 working</a>
-                                    <!--end::Title-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="d-flex mb-5">
-                                    <!--begin::Arrow-->
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen057.svg-->
-                                    <span class="svg-icon svg-icon-2 mt-0 me-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
-                                                fill="currentColor" />
-                                            <path
-                                                d="M11.9343 12.5657L9.53696 14.963C9.22669 15.2733 9.18488 15.7619 9.43792 16.1204C9.7616 16.5789 10.4211 16.6334 10.8156 16.2342L14.3054 12.7029C14.6903 12.3134 14.6903 11.6866 14.3054 11.2971L10.8156 7.76582C10.4211 7.3666 9.7616 7.42107 9.43792 7.87962C9.18488 8.23809 9.22669 8.72669 9.53696 9.03696L11.9343 11.4343C12.2467 11.7467 12.2467 12.2533 11.9343 12.5657Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                    <!--end::Arrow-->
-                                    <!--begin::Title-->
-                                    <a href="../../demo5/dist/apps/devs/question.html"
-                                        class="text-gray-700 text-hover-primary fs-6 fw-bold">I want to get a refund</a>
-                                    <!--end::Title-->
-                                </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="d-flex">
-                                    <!--begin::Arrow-->
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen057.svg-->
-                                    <span class="svg-icon svg-icon-2 mt-0 me-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
-                                                fill="currentColor" />
-                                            <path
-                                                d="M11.9343 12.5657L9.53696 14.963C9.22669 15.2733 9.18488 15.7619 9.43792 16.1204C9.7616 16.5789 10.4211 16.6334 10.8156 16.2342L14.3054 12.7029C14.6903 12.3134 14.6903 11.6866 14.3054 11.2971L10.8156 7.76582C10.4211 7.3666 9.7616 7.42107 9.43792 7.87962C9.18488 8.23809 9.22669 8.72669 9.53696 9.03696L11.9343 11.4343C12.2467 11.7467 12.2467 12.2533 11.9343 12.5657Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                    <!--end::Arrow-->
-                                    <!--begin::Title-->
-                                    <a href="../../demo5/dist/apps/devs/question.html"
-                                        class="text-gray-700 text-hover-primary fs-6 fw-bold">How to use Metrponic with
-                                        Rails Framework ?</a>
-                                    <!--end::Title-->
-                                </div>
-                                <!--end::Item-->
-                            </div>
-                            <!--end: Card Body-->
-                        </div>
-                        <!--end::Popular Questions-->
+                       <popular/>
 
                     </div>
                     <!--end::Sidebar-->
@@ -922,6 +626,7 @@
 import tags from './Tags.vue';
 import activity from './Activity.vue';
 import publique from './Publique.vue'
+import popular from './Popular.vue'
 
 import store from '../store';
 
