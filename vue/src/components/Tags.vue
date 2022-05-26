@@ -10,7 +10,7 @@
     <div v-for="(item,index) in data" :key="index" class="menu-item">
         <a href="../../demo5/dist/index.html" class="menu-link">
             <span class="menu-title">{{item.name}}</span>
-            <span class="menu-badge">0</span>
+            <span class="menu-badge">{{item.question}}</span>
         </a>
     </div>
     <!--end::Menu item-->

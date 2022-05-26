@@ -13,6 +13,7 @@ const store = createStore({
         },
         questions: {
             loading: false,
+            links: [],
             data: [],
         },
         currentQuestion: {
@@ -20,6 +21,9 @@ const store = createStore({
             data: {}
         },
         currentAnswer: {
+            data: {}
+        },
+        userProfile: {
             data: {}
         }
     },
@@ -76,9 +80,10 @@ const store = createStore({
             }
             return response;
         },
-        getQuestions({commit}) {
+        getQuestions({commit},{url=null}={}) {
+            url=url||'/question/index'
             commit('setQuestionLoading', true)
-            return axiosClient.get('/question/index').then((res) => {
+            return axiosClient.get(url).then((res) => {
                 commit('setQuestions', res.data);
                 commit('setQuestionLoading', false)
                 return res;
@@ -99,6 +104,33 @@ const store = createStore({
                 commit('setAnswer', res.data)
                 return res;
             });
+        },
+        deleteQuestion({commit}, slug) {
+            return axiosClient.delete(`/question/${slug}/delete`);
+        },
+        deleteAnswer({commit}, id) {
+            return axiosClient.delete(`/answer/${id}/delete`)
+        },
+        getProfileData({commit}) {
+            return axiosClient.get('/profile').then((res) => {
+                commit('setUserProfile', res.data);
+                return res;
+            });
+        },
+        updateProfile({commit}, data) {
+            return axiosClient.put('/profile/update', data).then((res) => {
+                return res;
+            })
+        },
+        updateEmail({commit}, data) {
+            return axiosClient.put('/profile/email', data).then((res) => {
+                return res;
+            })
+        },
+        updatePassword({commit}, data) {
+            return axiosClient.put('/profile/password', data).then((res) => {
+                return res;
+            })
         }
     },
     mutations: {
@@ -118,7 +150,8 @@ const store = createStore({
             state.tags.data = tagData.tags;
         },
         setQuestions: (state, questionData) => {
-            state.questions.data = questionData.questions
+            state.questions.links = questionData.meta
+            state.questions.data = questionData.data
         },
         setQuestionLoading: (state, loading) => {
             state.questions.loading = loading
@@ -131,6 +164,9 @@ const store = createStore({
         },
         setAnswer: (state, answer) => {
             state.currentAnswer.data = answer.data
+        },
+        setUserProfile: (state, user) => {
+            state.userProfile.data = user.data;
         }
     },
     modules: {}

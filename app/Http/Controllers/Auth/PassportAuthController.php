@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class PassportAuthController extends Controller
         $token = $user->createToken('main')->accessToken;
 
         return response([
-            'user' => $user,
+            'user' => new UserResource($user),
             'token' => $token,
         ]);
     }
@@ -58,7 +59,7 @@ class PassportAuthController extends Controller
          * @var User $user
          */
 
-        $user = Auth::user();
+        $user = new UserResource(Auth::user());
         $token = $user->createToken('main')->accessToken;
 
         return response([

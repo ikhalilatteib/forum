@@ -6,7 +6,7 @@
             <h1 class="d-flex align-items-center my-1">
                 <span class="text-dark fw-bolder fs-1">Tüm Sorular</span>
                 <!--begin::Description-->
-                <small class="text-muted fs-6 fw-bold ms-1">(0)</small>
+                <small class="text-muted fs-6 fw-bold ms-1">({{questions.links.total}}) </small>
                 <!--end::Description-->
             </h1>
             <!--end::Title-->
@@ -35,7 +35,6 @@ import {useStore} from "vuex";
 
 const store = useStore();
 const questions = computed(() => store.state.questions);
-
 
 </script>
 

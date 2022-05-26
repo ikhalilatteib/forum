@@ -7,6 +7,7 @@ import DefaultLayout from "../components/DefaultLayout.vue";
 import store from '../store';
 import AddQuestion from '../views/AddQuestion.vue'
 import ShowQuestion from '../views/ShowQuestion.vue'
+import Profile from '../views/Profile.vue'
 
 const routes = [
     {
@@ -19,7 +20,9 @@ const routes = [
                 path: '/question/edit/:slug', name: 'EditQuestion', component: AddQuestion, meta: {requiresAuth: true}
             }, {
                 path: '/question/:slug', name: 'ShowQuestion', component: ShowQuestion
-            }
+            },{
+                path: '/profile', name: 'Profile', component: Profile, meta: {requiresAuth: true}
+            },
         ]
     },
     {

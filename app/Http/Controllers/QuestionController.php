@@ -20,12 +20,9 @@ class QuestionController extends Controller
     {
     }
     
-    public function indexQuestion()
+    public function indexQuestion(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $questions = $this->questionRepository->index();
-        return response([
-            'questions' => $questions
-        ]);
+        return $this->questionRepository->index();
     }
     
     public function storeQuestion(QuestionRequest $request)

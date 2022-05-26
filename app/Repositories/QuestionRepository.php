@@ -12,7 +12,7 @@ class QuestionRepository
 
     public function index(): AnonymousResourceCollection
     {
-      return  QuestionResource::collection(Question::query()->latest()->get());
+      return  QuestionResource::collection(Question::query()->latest()->paginate(5));
     }
 
     public function singleQuestion($question): QuestionResource

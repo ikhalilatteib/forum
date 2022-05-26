@@ -76,6 +76,7 @@ const user = {
 function login(ev) {
     ev.preventDefault();
     store.dispatch("login", user).then((res) => {
+        store.dispatch('getQuestions')
         router.push({
             name: 'Dashboard'
         });

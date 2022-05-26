@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'photo',
+        'telephone',
         'password',
     ];
 
@@ -53,4 +54,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Answer::class);
     }
+    
 }

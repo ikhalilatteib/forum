@@ -30,8 +30,11 @@ Route::middleware('auth:api')->group(function () {
      *  User Controller Group
      */
     Route::controller(UserController::class)->group(function () {
-        Route::post('profile/update', 'updateUserProfile')->name('update.user.profile');
-        Route::delete('profile/delete', 'destroyUser')->name('delete.user.profile');
+        Route::get('/profile','userProfile')->name('user.profile');
+        Route::put('/profile/update', 'updateUserProfile')->name('update.user.profile');
+        Route::put('/profile/email', 'userUpdateEmail')->name('update.user.email');
+        Route::put('/profile/password', 'userUpdatePassword')->name('update.user.password');
+        Route::delete('/profile/delete', 'destroyUser')->name('delete.user.profile');
     });
     
     /**

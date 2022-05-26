@@ -44,9 +44,19 @@
         <div class="d-flex align-items-center py-1">
           <!--begin::Symbol-->
           <div class="symbol symbol-35px me-2">
-            <div class="symbol-label bg-light-success fs-3 fw-bold text-success text-uppercase">
+            <img v-if="question.user.photo" :src="question.user.photo" :alt="question.user.name">
+            <div v-else
+                 class="
+              symbol-label
+              bg-light-success
+              fs-3
+              fw-bold
+              text-success text-uppercase
+            "
+            >
               {{ question.user.name.charAt(0) }}
             </div>
+
           </div>
           <!--end::Symbol-->
           <!--begin::Name-->
@@ -103,24 +113,14 @@
     <!--end::Separator-->
 
     <AnswerList  :question="question"/>
-    <!--begin::Pagination-->
-    <div class="d-flex flex-center mb-0">
-      <a href="#" class="btn btn-icon btn-light btn-active-light-primary h-30px w-30px fw-bold fs-6 mx-2">1</a>
-      <a href="#"
-         class="btn btn-icon btn-light btn-active-light-primary h-30px w-30px fw-bold fs-6 mx-2 active">2</a>
-      <a href="#" class="btn btn-icon btn-light btn-active-light-primary h-30px w-30px fw-bold fs-6 mx-2">3</a>
-      <a href="#" class="btn btn-icon btn-light btn-active-light-primary h-30px w-30px fw-bold fs-6 mx-2">4</a>
-      <a href="#" class="btn btn-icon btn-light btn-active-light-primary h-30px w-30px fw-bold fs-6 mx-2">5</a>
-      <span class="text-muted fw-bold fs-6 mx-2">..</span>
-      <a href="#" class="btn btn-icon btn-light btn-active-light-primary h-30px w-30px fw-bold fs-6 mx-2">19</a>
-    </div>
+
     <!--end::Questions-->
   </div>
   <!--end::Post-->
 </template>
 
 <script setup>
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 import AnswerEditor from "../components/answers/AnswerEditor.vue";
@@ -131,9 +131,11 @@ const route = useRoute();
 const store = useStore();
 
 
+store.dispatch('getQuestion', route.params.slug);
+
 const question = computed(() => store.state.currentQuestion.data);
 const questionLoading = computed(() => store.state.currentQuestion.loading)
-store.dispatch('getQuestion', route.params.slug);
+
 const guest = computed(() => store.state.user.token)
 
 </script>

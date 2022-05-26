@@ -10,7 +10,7 @@
     <div class="menu-item">
         <router-link :to="{name:'Dashboard'}" class="menu-link active">
             <span class="menu-title">Tüm Sorular</span>
-            <span class="menu-badge">0</span>
+            <span class="menu-badge">{{questions.links.total}}</span>
         </router-link>
     </div>
     <!--end::Menu item-->
@@ -26,4 +26,7 @@
 </template>
 
 <script setup>
+const {questions} = defineProps({
+  questions: Object,
+});
 </script>
