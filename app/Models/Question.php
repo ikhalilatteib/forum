@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Traits\BelongsToUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
@@ -28,9 +27,9 @@ class Question extends Model
 
     public function answers(): HasMany
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class, 'question_id');
     }
-
+    
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()

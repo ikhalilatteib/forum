@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserEmailRequest;
 use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Http\Requests\UserUpdateProfileRequest;
+use App\Http\Resources\AnswerResource;
 use App\Http\Resources\QuestionResource;
 use App\Http\Resources\UserProfileResource;
-use App\Models\Question;
 use Exception;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -114,8 +115,13 @@ class UserController extends Controller
         }
     }
     
-    public function getAllQuestionForAuthUser()
+    public function getAllQuestionForAuthUser(): AnonymousResourceCollection
     {
-        return QuestionResource::collection(auth()->user()->questions()->paginate(5));
+        return QuestionResource::collection(auth()->user()->questions()->latest()->paginate(5));
+    }
+    
+    public function getAllAnswerForAuthUser(): AnonymousResourceCollection
+    {
+        return AnswerResource::collection(auth()->user()->answers()->latest()->paginate(5));
     }
 }

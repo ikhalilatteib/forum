@@ -39,7 +39,7 @@
   <h2 class="fw-bolder text-gray-900 mb-10">Cevap({{ question.replies }})</h2>
   <!--end::Heading-->
   <!--begin::Replies-->
-  <div class="mb-10" v-for="(ans, index) in question.answer.data" :key="index">
+  <div class="mb-10" v-for="(ans, index) in question.answer" :key="index">
     <!--begin::Reply-->
     <div class="border rounded p-2 p-lg-6 mb-10">
       <!--begin::Wrapper-->

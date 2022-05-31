@@ -80,12 +80,12 @@
             <!--begin::Svg Icon | path: icons/duotune/arrows/arr062.svg-->
 
             <span class="svg-icon svg-icon-5 ms-1 me-1">
-              <svg class="bi bi-eye fs-3x" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+              <svg class="bi bi-eye fs-3x" fill="#009ef7" height="16" viewBox="0 0 16 16" width="16"
                    xmlns="http://www.w3.org/2000/svg">
   <path
       d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
-      fill="currentColor"/>
-  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" fill="currentColor"/>
+      fill="#009ef7"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" fill="#009ef7"/>
 </svg> {{ question.view }}
 											</span>
             <!--end::Svg Icon--></a>
@@ -100,18 +100,6 @@
     <!--end::Separator-->
 
     <AnswerList  :question="question"/>
-    <div class="d-flex flex-center mb-0">
-
-      <a v-for="(link,index) in question.answer.links" :key="index" :class="[
-                 link.active? 'active':null,
-             ]"
-
-         aria-current="page"
-         class="btn btn-icon btn-light btn-active-light-primary h-30px px-4 w-auto fw-bold fs-6 mx-1"
-         href="#" @click="getForPage(link)"
-         v-html="link.label"
-      ></a>
-    </div>
     <!--end::Questions-->
   </div>
   <!--end::Post-->
@@ -133,14 +121,6 @@ const question = computed(() => store.state.currentQuestion.data);
 const questionLoading = computed(() => store.state.currentQuestion.loading)
 
 const guest = computed(() => store.state.user.token)
-
-
-function getForPage(link) {
-  if (!link.url || link.active) {
-    return;
-  }
-  store.dispatch('getQuestionByLinks', {links: link.url});
-}
 
 </script>
 

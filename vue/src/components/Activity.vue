@@ -16,10 +16,10 @@
     <!--end::Menu item-->
     <!--begin::Menu item-->
     <div class="menu-item">
-        <a href="../../demo5/dist/index.html" class="menu-link">
+        <router-link :to="{name:'MyAnswer'}" class="menu-link" :class="[this.$route.name === 'MyAnswer' ? 'active' : '']">
             <span class="menu-title">Cevaplarım</span>
-            <span class="menu-badge">{{answer}}</span>
-        </a>
+            <span class="menu-badge">{{count.answer}}</span>
+        </router-link>
     </div>
     <!--end::Menu item-->
 </template>

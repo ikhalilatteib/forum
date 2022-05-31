@@ -18,6 +18,6 @@ class QuestionRepository
     public function singleQuestion($question,$sessionId=null): QuestionResource
     {
         ViewCounter::viewerControl($question,$sessionId);
-        return new QuestionResource($question);
+        return new QuestionResource($question->load('answers'));
     }
 }

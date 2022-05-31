@@ -38,6 +38,11 @@ const store = createStore({
             loading: false,
             links: [],
             data: [],
+        },
+        myAnswers: {
+            loading: false,
+            links: [],
+            data: [],
         }
     },
     getters: {},
@@ -179,6 +184,15 @@ const store = createStore({
                 commit('setMyQuestionLoading', false)
                 return res;
             });
+        },
+        getMyAnswers({commit}, {url = null} = {}) {
+            url = url || '/user/answers'
+            commit('setMyAnswersLoading', true)
+            return axiosClient.get(url).then((res) => {
+                commit('setMyAnswers', res.data)
+                commit('setMyAnswersLoading', false)
+                return res;
+            });
         }
     },
     mutations: {
@@ -231,6 +245,13 @@ const store = createStore({
         },
         setMyQuestionLoading: (state, loading) => {
             state.myQuestions.loading = loading;
+        },
+        setMyAnswers: (state, answers) => {
+            state.myAnswers.links = answers.meta;
+            state.myAnswers.data = answers.data;
+        },
+        setMyAnswersLoading: (state, loading) => {
+            state.myAnswers.loading = loading;
         }
     },
     modules: {}

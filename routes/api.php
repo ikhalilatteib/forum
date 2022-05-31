@@ -36,6 +36,7 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/profile/password', 'userUpdatePassword')->name('update.user.password');
         Route::delete('/profile/delete', 'destroyUser')->name('delete.user.profile');
         Route::get('/user/questions','getAllQuestionForAuthUser')->name('user.questions');
+        Route::get('/user/answers','getAllAnswerForAuthUser')->name('user.answers');
     });
     
     /**

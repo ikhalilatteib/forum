@@ -11,13 +11,13 @@ class Answer extends Model
 {
     use HasFactory;
     use BelongsToUser;
-
+  
 
     protected $fillable = ['content','is_best','user_id','question_id'];
 
     public function questions(): BelongsTo
     {
-        return $this->belongsTo(Question::class);
+        return $this->belongsTo(Question::class, 'question_id');
     }
 
 

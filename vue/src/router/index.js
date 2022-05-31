@@ -10,6 +10,7 @@ import ShowQuestion from '../views/ShowQuestion.vue'
 import QuestionPerTag from '../views/QuestionPerTag.vue'
 import Profile from '../views/Profile.vue'
 import AllQuestionForAuthUser from '../views/AllQuestionForAuthUser.vue'
+import AllAnswerForAuthUser from '../views/AllAnswerForAuthUser.vue'
 
 const routes = [
     {
@@ -29,6 +30,9 @@ const routes = [
             },
             {
                 path: '/my-questions', name: 'MyQuestion', component: AllQuestionForAuthUser, meta: { requiresAuth: true }
+            },
+            {
+                path: '/my-answers', name: 'MyAnswer', component: AllAnswerForAuthUser, meta: { requiresAuth: true }
             },
         ]
     },
