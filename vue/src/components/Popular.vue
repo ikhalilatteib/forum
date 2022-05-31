@@ -12,7 +12,7 @@
     <div class="card-body pt-0">
       <!--begin::Item-->
       <div
-          v-for="(item, index) in questions.data"
+          v-for="(item, index) in popular"
           :key="index"
           class="d-flex mb-5"
       >
@@ -59,7 +59,12 @@
   <!--end::Popular Questions-->
 </template>
 <script setup>
-const {questions} = defineProps({
-  questions: Object,
-});
+import {useStore} from "vuex";
+import {computed} from "vue";
+
+const store = useStore();
+
+const popular = computed(()=>store.state.popularQuestion.data);
+
+store.dispatch('getPopularQuestion');
 </script>

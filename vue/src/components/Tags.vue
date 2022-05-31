@@ -8,7 +8,7 @@
     <!--end::Heading-->
     <!--begin::Menu item-->
     <div v-for="(item,index) in data" :key="index" class="menu-item">
-        <a href="../../demo5/dist/index.html" class="menu-link">
+        <a :href="`/tags/${item.slug}`" class="menu-link" :class="[this.$route.params.slug === item.slug ? 'active' : '']">
             <span class="menu-title">{{item.name}}</span>
             <span class="menu-badge">{{item.question}}</span>
         </a>

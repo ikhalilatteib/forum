@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserEmailRequest;
 use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Http\Requests\UserUpdateProfileRequest;
+use App\Http\Resources\QuestionResource;
 use App\Http\Resources\UserProfileResource;
+use App\Models\Question;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
@@ -110,5 +112,10 @@ class UserController extends Controller
         } catch (\RuntimeException $exception) {
             throw new \RuntimeException('did not match data URI with image data');
         }
+    }
+    
+    public function getAllQuestionForAuthUser()
+    {
+        return QuestionResource::collection(auth()->user()->questions()->paginate(5));
     }
 }

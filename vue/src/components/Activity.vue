@@ -8,10 +8,10 @@
     <!--end::Heading-->
     <!--begin::Menu item-->
     <div class="menu-item">
-        <a href="../../demo5/dist/apps/devs/question.html" class="menu-link">
+        <router-link :to="{name:'MyQuestion'}" class="menu-link"  :class="[this.$route.name === 'MyQuestion' ? 'active' : '']">
             <span class="menu-title">Sorularım</span>
             <span class="menu-badge">{{count.question}}</span>
-        </a>
+        </router-link>
     </div>
     <!--end::Menu item-->
     <!--begin::Menu item-->
@@ -19,14 +19,6 @@
         <a href="../../demo5/dist/index.html" class="menu-link">
             <span class="menu-title">Cevaplarım</span>
             <span class="menu-badge">{{answer}}</span>
-        </a>
-    </div>
-    <!--end::Menu item-->
-    <!--begin::Menu item-->
-    <div class="menu-item">
-        <a href="../../demo5/dist/index.html" class="menu-link">
-            <span class="menu-title">Kaydedılanlar</span>
-            <span class="menu-badge">0</span>
         </a>
     </div>
     <!--end::Menu item-->

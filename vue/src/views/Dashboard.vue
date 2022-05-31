@@ -34,6 +34,7 @@ import {computed} from "vue";
 import {useStore} from "vuex";
 
 const store = useStore();
+store.dispatch('getQuestions')
 const questions = computed(() => store.state.questions);
 
 </script>

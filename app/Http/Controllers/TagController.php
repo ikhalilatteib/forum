@@ -7,7 +7,6 @@ use App\Models\Tag;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Bridge\PsrHttpMessage\Tests\Fixtures\Response;
 
 class TagController extends Controller
 {
@@ -18,11 +17,16 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = TagResource::collection(Tag::orderBy('name')->get());
+        $tags = TagResource::collection(Tag::query()->orderBy('name')->get());
         return response()->json(['tags' => $tags]);
     }
-
-
+    
+    public function questionPerTag(Tag $tag): TagResource
+    {
+        return new TagResource($tag);
+    }
+    
+    
     /**
      * Store a newly created resource in storage.
      *

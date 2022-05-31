@@ -73,33 +73,20 @@
              class="btn btn-sm btn-outline btn-outline-dashed btn-outline-default px-4 me-2">{{ question.replies }}
             Cevap</a>
           <a href="../../demo5/dist/apps/devs/tag.html"
-             class="btn btn-sm btn-light px-4 me-2">{{ question.tag_id.name }}</a>
-          <a href="#" class="btn btn-sm btn-icon btn-light me-2" data-bs-toggle="tooltip"
-             title="Save for your future reference" data-bs-dismiss="click">
-            <!--begin::Svg Icon | path: icons/duotune/general/gen056.svg-->
-            <span class="svg-icon svg-icon-2">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                               viewBox="0 0 24 24" fill="none">
-														<path
-                                d="M16.0077 19.2901L12.9293 17.5311C12.3487 17.1993 11.6407 17.1796 11.0426 17.4787L6.89443 19.5528C5.56462 20.2177 4 19.2507 4 17.7639V5C4 3.89543 4.89543 3 6 3H17C18.1046 3 19 3.89543 19 5V17.5536C19 19.0893 17.341 20.052 16.0077 19.2901Z"
-                                fill="currentColor"/>
-													</svg>
-												</span>
-            <!--end::Svg Icon-->
-          </a>
-          <a href="#" class="btn btn-sm btn-flex btn-light px-4" data-bs-toggle="tooltip"
-             title="Upvote this question" data-bs-dismiss="click">23
+             class="btn btn-sm btn-light px-4 me-2">{{ question.tag.name }}</a>
+        
+          <a href="#" class="btn btn-sm btn-flex btn-light px-1" data-bs-toggle="tooltip"
+             title="Upvote this question" data-bs-dismiss="click">
             <!--begin::Svg Icon | path: icons/duotune/arrows/arr062.svg-->
-            <span class="svg-icon svg-icon-7 ms-1 me-1">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                             viewBox="0 0 24 24" fill="none">
-													<path opacity="0.5"
-                                d="M13 9.59998V21C13 21.6 12.6 22 12 22C11.4 22 11 21.6 11 21V9.59998H13Z"
-                                fill="currentColor"/>
-													<path
-                              d="M5.7071 7.89291C5.07714 8.52288 5.52331 9.60002 6.41421 9.60002H17.5858C18.4767 9.60002 18.9229 8.52288 18.2929 7.89291L12.7 2.3C12.3 1.9 11.7 1.9 11.3 2.3L5.7071 7.89291Z"
-                              fill="currentColor"/>
-												</svg>
+
+            <span class="svg-icon svg-icon-5 ms-1 me-1">
+              <svg class="bi bi-eye fs-3x" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+                   xmlns="http://www.w3.org/2000/svg">
+  <path
+      d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+      fill="currentColor"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" fill="currentColor"/>
+</svg> {{ question.view }}
 											</span>
             <!--end::Svg Icon--></a>
         </div>
@@ -113,23 +100,32 @@
     <!--end::Separator-->
 
     <AnswerList  :question="question"/>
+    <div class="d-flex flex-center mb-0">
 
+      <a v-for="(link,index) in question.answer.links" :key="index" :class="[
+                 link.active? 'active':null,
+             ]"
+
+         aria-current="page"
+         class="btn btn-icon btn-light btn-active-light-primary h-30px px-4 w-auto fw-bold fs-6 mx-1"
+         href="#" @click="getForPage(link)"
+         v-html="link.label"
+      ></a>
+    </div>
     <!--end::Questions-->
   </div>
   <!--end::Post-->
 </template>
 
 <script setup>
-import {computed, onMounted} from "vue";
+import {computed} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
-import AnswerEditor from "../components/answers/AnswerEditor.vue";
 import Loading from "../components/Loading.vue";
 import AnswerList from "../components/answers/AnswerList.vue";
 
 const route = useRoute();
 const store = useStore();
-
 
 store.dispatch('getQuestion', route.params.slug);
 
@@ -137,6 +133,14 @@ const question = computed(() => store.state.currentQuestion.data);
 const questionLoading = computed(() => store.state.currentQuestion.loading)
 
 const guest = computed(() => store.state.user.token)
+
+
+function getForPage(link) {
+  if (!link.url || link.active) {
+    return;
+  }
+  store.dispatch('getQuestionByLinks', {links: link.url});
+}
 
 </script>
 

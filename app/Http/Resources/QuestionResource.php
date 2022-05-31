@@ -25,11 +25,13 @@ class QuestionResource extends JsonResource
             'active' => $this->is_active,
             'slug' => $this->slug,
             'user' => new UserResource($this->user),
-            'tag_id' => new TagResource($this->tag),
-            'answer' => Answer::query()->with('user')->whereQuestionId($this->id)->latest()->paginate(),// AnswerResource::collection( $this->answers()->latest()->paginate(5)),
+            'tag' => new TagResource($this->tag),
+            'answer' => Answer::query()->with('user')->whereQuestionId($this->id)->latest()->paginate(5),// AnswerResource::collection( $this->answers()->latest()->paginate(5)),
             'created_at' => $this->created_at,
             'diff' => $this->created_at->diffForHumans(),
-            'replies'=>$this->answers()->count()
+            'replies'=>$this->answers()->count(),
+            'view'=>$this->visits,
+            'tag_id'=>$this->tag_id
         ];
     }
 }

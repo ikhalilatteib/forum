@@ -590,7 +590,7 @@
               <!--end::Input-->
             </form>
             <!--end::Quick Search-->
-            <Popular :questions="questions" />
+            <Popular/>
 
           </div>
           <!--end::Sidebar-->
@@ -628,9 +628,10 @@ import Activity from './Activity.vue';
 import Publique from './Publique.vue'
 import Popular from './Popular.vue'
 
-import { useRouter } from "vue-router";
-import { computed } from "vue";
-import { useStore } from "vuex";
+import {useRouter} from "vue-router";
+import {computed} from "vue";
+import {useStore} from "vuex";
+import Cookies from "js-cookie";
 
 const router = useRouter();
 const store = useStore();
@@ -651,8 +652,8 @@ function logout() {
     });
 }
 
+let expiryDate = new Date(Date.now() + 2 * (60 * 60 * 1000))
 
-
-
+Cookies.set('session_id', 'Ikay3310', {expires: expiryDate, path: ''})
 
 </script>

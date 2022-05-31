@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\ViewCounter;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class QuestionRepository
@@ -15,8 +15,9 @@ class QuestionRepository
       return  QuestionResource::collection(Question::query()->latest()->paginate(5));
     }
 
-    public function singleQuestion($question): QuestionResource
+    public function singleQuestion($question,$sessionId=null): QuestionResource
     {
+        ViewCounter::viewerControl($question,$sessionId);
         return new QuestionResource($question);
     }
 }

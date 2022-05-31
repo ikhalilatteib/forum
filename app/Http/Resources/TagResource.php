@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Question;
+use App\Models\Tag;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TagResource extends JsonResource
@@ -17,6 +19,8 @@ class TagResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
+            'questions' => Question::query()->whereTagId($this->id)->paginate(5),
             'question'=>$this->question()->count(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

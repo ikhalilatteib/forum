@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\QuestionRequest;
 use App\Http\Requests\QuestionUpdateRequest;
+use App\Http\Resources\PopularQuestionResource;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class QuestionController extends Controller
 {
@@ -33,9 +35,9 @@ class QuestionController extends Controller
         ]);
     }
     
-    public function showQuestion(Question $question): QuestionResource
+    public function showQuestion(Question $question,$sessionId): QuestionResource
     {
-        return $this->questionRepository->singleQuestion($question);
+        return $this->questionRepository->singleQuestion($question,$sessionId);
     }
     
     public function updateQuestion(QuestionUpdateRequest $request, Question $question)
@@ -56,5 +58,10 @@ class QuestionController extends Controller
         $question->delete();
         
         return response('', 204);
+    }
+    
+    public function popularQuestion(): AnonymousResourceCollection
+    {
+        return PopularQuestionResource::collection(Question::query()->select(['title','slug'])->orderBy('visits','desc')->limit(10)->get());
     }
 }

@@ -35,6 +35,7 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/profile/email', 'userUpdateEmail')->name('update.user.email');
         Route::put('/profile/password', 'userUpdatePassword')->name('update.user.password');
         Route::delete('/profile/delete', 'destroyUser')->name('delete.user.profile');
+        Route::get('/user/questions','getAllQuestionForAuthUser')->name('user.questions');
     });
     
     /**
@@ -62,9 +63,11 @@ Route::middleware('auth:api')->group(function () {
  */
 
 Route::resources(['tags' => TagController::class]);
+Route::get('/tags/{tag:slug}',[TagController::class,'questionPerTag'])->name('question.per.tag');
 Route::controller(QuestionController::class)->prefix('question')->group(function () {
     Route::get('/index', 'indexQuestion')->name('index.question');
-    Route::get('/{question:slug}', 'showQuestion')->name('show.question');
+    Route::get('/popular','popularQuestion')->name('popular.question');
+    Route::get('/{question:slug}/{sessionId}', 'showQuestion')->name('show.question');
 });
 
 /*

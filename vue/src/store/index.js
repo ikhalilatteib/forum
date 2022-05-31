@@ -1,5 +1,6 @@
 import {createStore} from "vuex";
 import axiosClient from "../axios";
+import Cookies from "js-cookie";
 
 
 const store = createStore({
@@ -16,6 +17,10 @@ const store = createStore({
             links: [],
             data: [],
         },
+        perTags: {
+            loading: false,
+            data: [],
+        },
         currentQuestion: {
             loading: false,
             data: {}
@@ -25,6 +30,14 @@ const store = createStore({
         },
         userProfile: {
             data: {}
+        },
+        popularQuestion: {
+            data: {}
+        },
+        myQuestions: {
+            loading: false,
+            links: [],
+            data: [],
         }
     },
     getters: {},
@@ -80,8 +93,8 @@ const store = createStore({
             }
             return response;
         },
-        getQuestions({commit},{url=null}={}) {
-            url=url||'/question/index'
+        getQuestions({commit}, {url = null} = {}) {
+            url = url || '/question/index'
             commit('setQuestionLoading', true)
             return axiosClient.get(url).then((res) => {
                 commit('setQuestions', res.data);
@@ -91,7 +104,18 @@ const store = createStore({
         },
         getQuestion({commit}, slug) {
             commit('setCurrentQuestionLoading', true)
-            return axiosClient.get(`/question/${slug}`).then((res) => {
+            const sessionId = Cookies.get('session_id')
+            return axiosClient.get(`/question/${slug}/${sessionId}`).then((res) => {
+                commit('setCurrentQuestion', res.data)
+                commit('setCurrentQuestionLoading', false)
+                return res;
+            }).catch((err) => {
+                throw err;
+            })
+        },
+        getQuestionByLinks({commit}, {links}) {
+            commit('setCurrentQuestionLoading', true)
+            return axiosClient.get(links).then((res) => {
                 commit('setCurrentQuestion', res.data)
                 commit('setCurrentQuestionLoading', false)
                 return res;
@@ -131,6 +155,30 @@ const store = createStore({
             return axiosClient.put('/profile/password', data).then((res) => {
                 return res;
             })
+        },
+        getPopularQuestion({commit}) {
+
+            return axiosClient.get('/question/popular').then((res) => {
+                commit('setPopularQuestion', res.data)
+                return res;
+            })
+        },
+        getQuestionPerTag({commit}, slug) {
+            commit('setTagLoading', true)
+            return axiosClient.get(`/tags/${slug}`).then((res) => {
+                commit('setQuestionPerTag', res.data)
+                commit('setTagLoading', false)
+                return res;
+            });
+        },
+        getMyQuestions({commit}, {url = null} = {}) {
+            url = url || '/user/questions'
+            commit('setMyQuestionLoading', true)
+            return axiosClient.get(url).then((res) => {
+                commit('setMyQuestions', res.data)
+                commit('setMyQuestionLoading', false)
+                return res;
+            });
         }
     },
     mutations: {
@@ -167,6 +215,22 @@ const store = createStore({
         },
         setUserProfile: (state, user) => {
             state.userProfile.data = user.data;
+        },
+        setPopularQuestion: (state, popular) => {
+            state.popularQuestion.data = popular.data;
+        },
+        setQuestionPerTag: (state, tags) => {
+            state.perTags.data = tags.data
+        },
+        setTagLoading: (state, loading) => {
+            state.perTags.loading = loading
+        },
+        setMyQuestions: (state, questions) => {
+            state.myQuestions.links = questions.meta;
+            state.myQuestions.data = questions.data;
+        },
+        setMyQuestionLoading: (state, loading) => {
+            state.myQuestions.loading = loading;
         }
     },
     modules: {}
