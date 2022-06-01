@@ -24,6 +24,10 @@
                 <label class="form-label fw-bolder text-dark fs-6"> İsminiz</label>
                 <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
                     v-model="user.name" autocomplete="off" />
+              <div v-if="errorMsg"
+                   :class="[errorMsg.name?'fv-plugins-message-container invalid-feedback':'']">
+                {{ errorMsg.name ? errorMsg.name[0] : null }}
+              </div>
 
                 <!--begin::Col-->
             </div>
@@ -33,6 +37,10 @@
                 <label class="form-label fw-bolder text-dark fs-6">Email</label>
                 <input class="form-control form-control-lg form-control-solid" type="email" placeholder=""
                     v-model="user.email" autocomplete="off" />
+              <div v-if="errorMsg"
+                   :class="[errorMsg.email?'fv-plugins-message-container invalid-feedback':'']">
+                {{ errorMsg.email ? errorMsg.email[0] : null }}
+              </div>
             </div>
             <!--end::Input group-->
             <!--begin::Input group-->
@@ -46,6 +54,10 @@
                     <div class="position-relative mb-3">
                         <input class="form-control form-control-lg form-control-solid" type="password" placeholder=""
                             v-model="user.password" autocomplete="off" />
+                      <div v-if="errorMsg"
+                           :class="[errorMsg.password?'fv-plugins-message-container invalid-feedback':'']">
+                        {{ errorMsg.password ? errorMsg.password[0] : null }}
+                      </div>
                     </div>
                     <!--end::Input wrapper-->
                 </div>
@@ -60,20 +72,21 @@
             </div>
             <!--end::Input group-->
             <!--begin::Input group-->
-            <div class="fv-row mb-10">
-                <label class="form-check form-check-custom form-check-solid form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="toc" value="1" />
-                    <span class="form-check-label fw-bold text-gray-700 fs-6">I Agree
-                        <a href="#" class="ms-1 link-primary">Terms and conditions</a>.</span>
-                </label>
-            </div>
+<!--            <div class="fv-row mb-10">-->
+<!--                <label class="form-check form-check-custom form-check-solid form-check-inline">-->
+<!--                    <input class="form-check-input" type="checkbox" name="toc" value="1" />-->
+<!--                    <span class="form-check-label fw-bold text-gray-700 fs-6">I Agree-->
+<!--                        <a href="#" class="ms-1 link-primary">Terms and conditions</a>.</span>-->
+<!--                </label>-->
+<!--            </div>-->
             <!--end::Input group-->
             <!--begin::Actions-->
             <div class="text-center">
                 <button type="submit" class="btn btn-lg btn-primary">
-                    <span class="indicator-label">Oluştur</span>
-                    <span class="indicator-progress">Please wait...
+                   <span v-if="loading" class="indicator-progress">Please wait...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    <span  v-else class="indicator-label">Oluştur</span>
+
                 </button>
             </div>
             <!--end::Actions-->
@@ -86,6 +99,7 @@
 <script setup>
 import store from "../store";
 import { useRouter } from "vue-router";
+import {ref} from "vue";
 
 const router = useRouter();
 const user = {
@@ -95,9 +109,14 @@ const user = {
     password_confirmation: "",
 };
 
+let loading = ref(false)
+
+const errorMsg =ref({});
 function register(ev) {
     ev.preventDefault();
+    loading.value=true
     store.dispatch("register", user).then((res) => {
+      loading.value=true;
         router.push({
             name: "Dashboard",
         });

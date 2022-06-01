@@ -56,7 +56,7 @@
         <input
             v-model="user.password"
             autocomplete="off"
-            class="form-control form-control-lg form-control-solid is-valid"
+            class="form-control form-control-lg form-control-solid"
             type="password"
         />
         <div v-if="errorMsg.errors"

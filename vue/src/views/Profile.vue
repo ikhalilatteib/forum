@@ -247,7 +247,6 @@
     <!--end::Navbar-->
     <!--begin::Basic info-->
     <div class="card mb-5 mb-xl-10">
-      <pre>{{ inform }}</pre>
       <!--begin::Card header-->
       <div
           aria-controls="kt_account_profile_details"
@@ -282,7 +281,7 @@
                     class="image-input image-input-outline"
                     data-kt-image-input="true"
                     style="
-                    background-image: url(/src/assets/media/svg/avatars/blank.svg);
+                    background-image: url(../assets/media/svg/avatars/blank.svg);
                   "
                 >
                   <!--begin::Preview existing avatar-->
@@ -375,11 +374,13 @@
                     form-control form-control-lg form-control-solid
                     mb-3 mb-lg-0
                   "
-                    name="fname"
                     placeholder="First name"
                     type="text"
                 />
-
+                <div v-if="infoErrorMsg"
+                     :class="[infoErrorMsg.name?'fv-plugins-message-container invalid-feedback mb-3':'']">
+                  {{ infoErrorMsg.name ? infoErrorMsg.name[0] : null }}
+                </div>
                 <!--end::Row-->
               </div>
               <!--end::Col-->
@@ -405,6 +406,10 @@
                     placeholder="Phone number"
                     type="tel"
                 />
+                <div v-if="infoErrorMsg"
+                     :class="[infoErrorMsg.telephone?'fv-plugins-message-container invalid-feedback mb-3':'']">
+                  {{ infoErrorMsg.telephone ? infoErrorMsg.telephone[0] : null }}
+                </div>
               </div>
               <!--end::Col-->
             </div>
@@ -424,7 +429,14 @@
                 class="btn btn-primary"
                 type="submit"
             >
-              Değişiklikleri Kaydet
+               <span v-if="infoLoading" class="indicator-progress"
+               >Lüften Bekleyin ...
+            <span
+                class="spinner-border spinner-border-sm align-middle ms-2"
+            >
+            </span> </span>
+              <span v-else> Değişiklikleri Kaydet</span>
+
             </button>
           </div>
           <!--end::Actions-->
@@ -483,6 +495,10 @@
                           placeholder="Email Address"
                           type="email"
                       />
+                      <div v-if="emailErrorMsg"
+                           :class="[emailErrorMsg.email?'fv-plugins-message-container invalid-feedback mb-3':'']">
+                        {{ emailErrorMsg.email ? emailErrorMsg.email[0] : null }}
+                      </div>
                     </div>
                   </div>
                   <div class="col-lg-6">
@@ -498,6 +514,10 @@
                           class="form-control form-control-lg form-control-solid"
                           type="password"
                       />
+                      <div v-if="emailErrorMsg"
+                           :class="[emailErrorMsg.password?'fv-plugins-message-container invalid-feedback mb-3':'']">
+                        {{ emailErrorMsg.password ? emailErrorMsg.password[0] : null }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -506,7 +526,14 @@
                       class="btn btn-primary me-2 px-6"
                       type="submit"
                   >
-                    E-postayı Güncelle
+                      <span v-if="emailLoading" class="indicator-progress"
+                      >Lüften Bekleyin ...
+            <span
+                class="spinner-border spinner-border-sm align-middle ms-2"
+            >
+            </span> </span>
+                    <span v-else> E-postayı Güncelle</span>
+
                   </button>
                   <button
                       id="kt_signin_cancel"
@@ -563,6 +590,10 @@
                           class="form-control form-control-lg form-control-solid"
                           type="password"
                       />
+                      <div v-if="passwordErrorMsg"
+                           :class="[passwordErrorMsg.password?'fv-plugins-message-container invalid-feedback mb-3':'']">
+                        {{ passwordErrorMsg.password ? passwordErrorMsg.password[0] : null }}
+                      </div>
                     </div>
                   </div>
                   <div class="col-lg-4">
@@ -578,6 +609,10 @@
                           class="form-control form-control-lg form-control-solid"
                           type="password"
                       />
+                      <div v-if="passwordErrorMsg"
+                           :class="[passwordErrorMsg.new_password?'fv-plugins-message-container invalid-feedback mb-3':'']">
+                        {{ passwordErrorMsg.new_password ? passwordErrorMsg.new_password[0] : null }}
+                      </div>
                     </div>
                   </div>
                   <div class="col-lg-4">
@@ -604,7 +639,14 @@
                       class="btn btn-primary me-2 px-6"
                       type="submit"
                   >
-                    Şifreyi güncelle
+                        <span v-if="passwordLoading" class="indicator-progress"
+                        >Lüften Bekleyin ...
+            <span
+                class="spinner-border spinner-border-sm align-middle ms-2"
+            >
+            </span> </span>
+                    <span v-else>Şifreyi güncelle</span>
+
                   </button>
                   <button
                       id="kt_password_cancel"
@@ -621,6 +663,7 @@
             <!--begin::Action-->
             <div id="kt_signin_password_button" class="ms-auto">
               <button class="btn btn-light btn-active-light-primary">
+
                 Şifreyi yenile
               </button>
             </div>
@@ -633,134 +676,142 @@
       <!--end::Content-->
     </div>
     <!--end::Sign-in Method-->
-    <!--begin::Notifications-->
-    <div class="card mb-5 mb-xl-10">
-      <!--begin::Card header-->
-      <div
-          aria-controls="kt_account_email_preferences"
-          aria-expanded="true"
-          class="card-header border-0 cursor-pointer"
-          data-bs-target="#kt_account_email_preferences"
-          data-bs-toggle="collapse"
-          role="button"
-      >
-        <div class="card-title m-0">
-          <h3 class="fw-bolder m-0">E-posta Tercihleri</h3>
-        </div>
-      </div>
-      <!--begin::Card header-->
-      <!--begin::Content-->
-      <div id="kt_account_settings_email_preferences" class="collapse show">
-        <!--begin::Form-->
-        <form class="form">
-          <!--begin::Card body-->
-          <div class="card-body border-top px-9 py-9">
-            <!--begin::Option-->
-            <label
-                class="
-                form-check form-check-custom form-check-solid
-                align-items-start
-              "
-            >
-              <!--begin::Input-->
-              <input
-                  class="form-check-input me-3"
-                  name="email-preferences[]"
-                  type="checkbox"
-                  value="1"
-              />
-              <!--end::Input-->
-              <!--begin::Label-->
-              <span
-                  class="form-check-label d-flex flex-column align-items-start"
-              >
-                <span class="fw-bolder fs-5 mb-0">Sorunuza cevap</span>
-                <span class="text-muted fs-6"
-                >Sorunuza verilen her cevap için bir bildirim alın</span
-                >
-              </span>
-              <!--end::Label-->
-            </label>
-            <!--end::Option-->
-            <!--begin::Option-->
-            <div class="separator separator-dashed my-6"></div>
-            <!--end::Option-->
-            <!--begin::Option-->
-            <label
-                class="
-                form-check form-check-custom form-check-solid
-                align-items-start
-              "
-            >
-              <!--begin::Input-->
-              <input
-                  checked="checked"
-                  class="form-check-input me-3"
-                  name="email-preferences[]"
-                  type="checkbox"
-                  value="1"
-              />
-              <!--end::Input-->
-              <!--begin::Label-->
-              <span
-                  class="form-check-label d-flex flex-column align-items-start"
-              >
-                <span class="fw-bolder fs-5 mb-0">Soruyu takip et</span>
-                <span class="text-muted fs-6"
-                >Bir soruya verdiğiniz yanıttan sonra her yanıtla birlikte bir
-                  bildirim alın</span
-                >
-              </span>
-              <!--end::Label-->
-            </label>
-            <!--end::Option-->
-            <!--begin::Option-->
-            <div class="separator separator-dashed my-6"></div>
-            <!--end::Option-->
-            <!--begin::Option-->
-            <label
-                class="
-                form-check form-check-custom form-check-solid
-                align-items-start
-              "
-            >
-              <!--begin::Input-->
-              <input
-                  class="form-check-input me-3"
-                  name="email-preferences[]"
-                  type="checkbox"
-                  value="1"
-              />
-              <!--end::Input-->
-              <!--begin::Label-->
-              <span
-                  class="form-check-label d-flex flex-column align-items-start"
-              >
-                <span class="fw-bolder fs-5 mb-0">Beğenme</span>
-                <span class="text-muted fs-6"
-                >Sorularınız veya cevaplarınız için her beğeni ile bir
-                  bildirim alın</span
-                >
-              </span>
-              <!--end::Label-->
-            </label>
-            <!--end::Option-->
-          </div>
-          <!--end::Card body-->
-          <!--begin::Card footer-->
-          <div class="card-footer d-flex justify-content-end py-6 px-9">
-            <button class="btn btn-light btn-active-light-primary me-2">
-              Vazgeç
-            </button>
-            <button class="btn btn-primary px-6">Değisiklikleri kaydet</button>
-          </div>
-          <!--end::Card footer-->
-        </form>
-        <!--end::Form-->
-      </div>
-      <!--end::Content-->
-    </div>
-    <!--end::Notifications-->
+    <!--    &lt;!&ndash;begin::Notifications&ndash;&gt;-->
+    <!--    <div class="card mb-5 mb-xl-10">-->
+    <!--      &lt;!&ndash;begin::Card header&ndash;&gt;-->
+    <!--      <div-->
+    <!--          aria-controls="kt_account_email_preferences"-->
+    <!--          aria-expanded="true"-->
+    <!--          class="card-header border-0 cursor-pointer"-->
+    <!--          data-bs-target="#kt_account_email_preferences"-->
+    <!--          data-bs-toggle="collapse"-->
+    <!--          role="button"-->
+    <!--      >-->
+    <!--        <div class="card-title m-0">-->
+    <!--          <h3 class="fw-bolder m-0">E-posta Tercihleri</h3>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      &lt;!&ndash;begin::Card header&ndash;&gt;-->
+    <!--      &lt;!&ndash;begin::Content&ndash;&gt;-->
+    <!--      <div id="kt_account_settings_email_preferences" class="collapse show">-->
+    <!--        &lt;!&ndash;begin::Form&ndash;&gt;-->
+    <!--        <form class="form">-->
+    <!--          &lt;!&ndash;begin::Card body&ndash;&gt;-->
+    <!--          <div class="card-body border-top px-9 py-9">-->
+    <!--            &lt;!&ndash;begin::Option&ndash;&gt;-->
+    <!--            <label-->
+    <!--                class="-->
+    <!--                form-check form-check-custom form-check-solid-->
+    <!--                align-items-start-->
+    <!--              "-->
+    <!--            >-->
+    <!--              &lt;!&ndash;begin::Input&ndash;&gt;-->
+    <!--              <input-->
+    <!--                  class="form-check-input me-3"-->
+    <!--                  name="email-preferences[]"-->
+    <!--                  type="checkbox"-->
+    <!--                  value="1"-->
+    <!--              />-->
+    <!--              &lt;!&ndash;end::Input&ndash;&gt;-->
+    <!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+    <!--              <span-->
+    <!--                  class="form-check-label d-flex flex-column align-items-start"-->
+    <!--              >-->
+    <!--                <span class="fw-bolder fs-5 mb-0">Sorunuza cevap</span>-->
+    <!--                <span class="text-muted fs-6"-->
+    <!--                >Sorunuza verilen her cevap için bir bildirim alın</span-->
+    <!--                >-->
+    <!--              </span>-->
+    <!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+    <!--            </label>-->
+    <!--            &lt;!&ndash;end::Option&ndash;&gt;-->
+    <!--            &lt;!&ndash;begin::Option&ndash;&gt;-->
+    <!--            <div class="separator separator-dashed my-6"></div>-->
+    <!--            &lt;!&ndash;end::Option&ndash;&gt;-->
+    <!--            &lt;!&ndash;begin::Option&ndash;&gt;-->
+    <!--            <label-->
+    <!--                class="-->
+    <!--                form-check form-check-custom form-check-solid-->
+    <!--                align-items-start-->
+    <!--              "-->
+    <!--            >-->
+    <!--              &lt;!&ndash;begin::Input&ndash;&gt;-->
+    <!--              <input-->
+    <!--                  checked="checked"-->
+    <!--                  class="form-check-input me-3"-->
+    <!--                  name="email-preferences[]"-->
+    <!--                  type="checkbox"-->
+    <!--                  value="1"-->
+    <!--              />-->
+    <!--              &lt;!&ndash;end::Input&ndash;&gt;-->
+    <!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+    <!--              <span-->
+    <!--                  class="form-check-label d-flex flex-column align-items-start"-->
+    <!--              >-->
+    <!--                <span class="fw-bolder fs-5 mb-0">Soruyu takip et</span>-->
+    <!--                <span class="text-muted fs-6"-->
+    <!--                >Bir soruya verdiğiniz yanıttan sonra her yanıtla birlikte bir-->
+    <!--                  bildirim alın</span-->
+    <!--                >-->
+    <!--              </span>-->
+    <!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+    <!--            </label>-->
+    <!--            &lt;!&ndash;end::Option&ndash;&gt;-->
+    <!--            &lt;!&ndash;begin::Option&ndash;&gt;-->
+    <!--            <div class="separator separator-dashed my-6"></div>-->
+    <!--            &lt;!&ndash;end::Option&ndash;&gt;-->
+    <!--            &lt;!&ndash;begin::Option&ndash;&gt;-->
+    <!--            <label-->
+    <!--                class="-->
+    <!--                form-check form-check-custom form-check-solid-->
+    <!--                align-items-start-->
+    <!--              "-->
+    <!--            >-->
+    <!--              &lt;!&ndash;begin::Input&ndash;&gt;-->
+    <!--              <input-->
+    <!--                  class="form-check-input me-3"-->
+    <!--                  name="email-preferences[]"-->
+    <!--                  type="checkbox"-->
+    <!--                  value="1"-->
+    <!--              />-->
+    <!--              &lt;!&ndash;end::Input&ndash;&gt;-->
+    <!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+    <!--              <span-->
+    <!--                  class="form-check-label d-flex flex-column align-items-start"-->
+    <!--              >-->
+    <!--                <span class="fw-bolder fs-5 mb-0">Beğenme</span>-->
+    <!--                <span class="text-muted fs-6"-->
+    <!--                >Sorularınız veya cevaplarınız için her beğeni ile bir-->
+    <!--                  bildirim alın</span-->
+    <!--                >-->
+    <!--              </span>-->
+    <!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+    <!--            </label>-->
+    <!--            &lt;!&ndash;end::Option&ndash;&gt;-->
+    <!--          </div>-->
+    <!--          &lt;!&ndash;end::Card body&ndash;&gt;-->
+    <!--          &lt;!&ndash;begin::Card footer&ndash;&gt;-->
+    <!--          <div class="card-footer d-flex justify-content-end py-6 px-9">-->
+    <!--            <button class="btn btn-light btn-active-light-primary me-2">-->
+    <!--              Vazgeç-->
+    <!--            </button>-->
+    <!--            <button class="btn btn-primary px-6">-->
+    <!--               <span v-if="loading" class="indicator-progress"-->
+    <!--               >Lüften Bekleyin ...-->
+    <!--            <span-->
+    <!--                class="spinner-border spinner-border-sm align-middle ms-2"-->
+    <!--            >-->
+    <!--            </span> </span>-->
+    <!--              <span v-else>Değisiklikleri kaydet</span>-->
+    <!--            </button>-->
+    <!--          </div>-->
+    <!--          &lt;!&ndash;end::Card footer&ndash;&gt;-->
+    <!--        </form>-->
+    <!--        &lt;!&ndash;end::Form&ndash;&gt;-->
+    <!--      </div>-->
+    <!--      &lt;!&ndash;end::Content&ndash;&gt;-->
+    <!--    </div>-->
+    <!--    &lt;!&ndash;end::Notifications&ndash;&gt;-->
     <!--begin::Deactivate Account-->
     <div class="card">
       <!--begin::Card header-->
@@ -898,8 +949,6 @@
 
 import {computed, ref, watch} from "vue";
 import {useStore} from "vuex";
-import swal from "sweetalert2/dist/sweetalert2.min";
-
 
 
 const store = useStore();
@@ -914,6 +963,13 @@ let inform = ref({
   new_password: '',
   password_confirmation: ''
 })
+let infoLoading = ref(false)
+let emailLoading = ref(false)
+let passwordLoading = ref(false)
+
+const infoErrorMsg = ref({})
+const emailErrorMsg = ref({})
+const passwordErrorMsg = ref({})
 
 watch(
     () => store.state.userProfile.data,
@@ -938,42 +994,59 @@ function onImageChoose(ev) {
 
 function updateProfileInformation(ev) {
   ev.preventDefault();
+  infoLoading.value = true;
   const data = {
     name: inform.value.name,
     telephone: inform.value.telephone,
     photo: inform.value.photo
   }
   store.dispatch('updateProfile', data).then((res) => {
+    infoLoading.value = false;
+    infoErrorMsg.value = {};
     store.dispatch('getProfileData')
+  }).catch((err) => {
+    infoLoading.value = false;
+    if (err.response.status === 422) {
+      infoErrorMsg.value = err.response.data.errors;
+    }
   })
 }
 
 function updateProfileEmail(ev) {
   ev.preventDefault();
+  emailLoading.value = true;
   const data = {
     email: inform.value.email, password: inform.value.password
   }
   store.dispatch('updateEmail', data).then((res) => {
-    this.swal({
-      text: "Sent password reset. Please check your email",
-      icon: "success",
-      buttonsStyling: !1,
-      confirmButtonText: "Ok, got it!",
-      customClass: {confirmButton: "btn font-weight-bold btn-light-primary"}
-    })
+    emailLoading.value = false;
+    emailErrorMsg.value = {};
     store.dispatch('getProfileData')
+  }).catch((err) => {
+    emailLoading.value = false;
+    if (err.response.status === 422) {
+      emailErrorMsg.value = err.response.data.errors;
+    }
   })
 }
 
 function updateProfilePassword(ev) {
   ev.preventDefault();
+  passwordLoading.value = true;
   const data = {
     password: inform.value.password,
     new_password: inform.value.new_password,
     new_password_confirmation: inform.value.password_confirmation
   }
   store.dispatch('updatePassword', data).then((res) => {
+    passwordLoading.value = false;
+    passwordErrorMsg.value = {};
     store.dispatch('getProfileData')
+  }).catch((err) => {
+    passwordLoading.value = false;
+    if (err.response.status === 422) {
+      passwordErrorMsg.value = err.response.data.errors;
+    }
   })
 }
 

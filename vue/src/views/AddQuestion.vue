@@ -58,6 +58,10 @@
           placeholder="Sorunun Başlığı"
           v-model="model.title"
         />
+        <div v-if="errorMsg"
+             :class="[errorMsg.title?'fv-plugins-message-container invalid-feedback':'']">
+          {{ errorMsg.title ? errorMsg.title[0] : null }}
+        </div>
         <!--end::Form control-->
       </div>
       <!--end::Input group-->
@@ -77,6 +81,10 @@
             placeholder="Sorunun İçeriği"
             data-kt-autosize="true"
           ></textarea>
+        </div>
+        <div v-if="errorMsg"
+             :class="[errorMsg.content?'fv-plugins-message-container invalid-feedback':'']">
+          {{ errorMsg.content ? errorMsg.content[0] : null }}
         </div>
         <!--end::Form control-->
       </div>
@@ -107,6 +115,10 @@
           </option>
         </select>
         <!--end::Form control-->
+        <div v-if="errorMsg"
+             :class="[errorMsg.tag_id?'fv-plugins-message-container invalid-feedback':'']">
+          {{ errorMsg.tag_id ? errorMsg.tag_id[0] : null }}
+        </div>
       </div>
       <!--end::Input group-->
       <!--begin::Actions-->
@@ -114,13 +126,16 @@
         <!--begin::Submit-->
         <button type="submit" id="kt_devs_ask_submit" class="btn btn-primary">
           <!--begin::Indicator-->
-          <span class="indicator-label">Gönder</span>
-          <span class="indicator-progress"
-            >Please wait...
+          <span v-if="loading" class="indicator-progress"
+          >Lüften Bekleyin ...
             <span
-              class="spinner-border spinner-border-sm align-middle ms-2"
-            ></span>
-          </span>
+                class="spinner-border spinner-border-sm align-middle ms-2"
+            >
+
+            </span> </span>
+          <span v-else class="indicator-label">Gönder</span>
+
+
           <!--end::Indicator-->
         </button>
         <!--begin::Submit-->
@@ -132,8 +147,8 @@
   <!--end::Post-->
 </template>
 <script setup>
-import { computed, ref, watch } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import {computed, ref, watch} from "vue";
+import {useRoute, useRouter} from "vue-router";
 import store from "../store";
 
 const router = useRouter();
@@ -144,16 +159,20 @@ let model = ref({
   content: "",
   tag: "",
   slug: "",
-  tag_id:''
+  tag_id: ''
 });
 
+let loading = ref(false);
+
+let errorMsg = ref({})
+
 watch(
-  () => store.state.currentQuestion.data,
-  (newVal, oldVal) => {
-    model.value = {
-      ...JSON.parse(JSON.stringify(newVal)),
-    };
-  }
+    () => store.state.currentQuestion.data,
+    (newVal, oldVal) => {
+      model.value = {
+        ...JSON.parse(JSON.stringify(newVal)),
+      };
+    }
 );
 
 if (route.params.slug) {
@@ -166,11 +185,18 @@ store.dispatch("getTags");
 
 function addQuestion(ev) {
   ev.preventDefault();
+  loading.value = true;
   store.dispatch("addQuestion", model.value).then((res) => {
+    loading.value = false
     store.dispatch("getQuestions");
     router.push({
       name: "Dashboard",
     });
+  }).catch((err) => {
+    loading.value = false;
+    if (err.response.status === 422) {
+      errorMsg.value = err.response.data.errors;
+    }
   });
 }
 </script>
