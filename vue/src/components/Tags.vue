@@ -21,12 +21,6 @@
     </div>
     <!--end::Collapse-->
     <!--begin::Heading-->
-    <div class="menu-item">
-        <div class="menu-link">
-            <a hred="#" class="menu-title text-muted fs-7" id="kt_aside_categories_toggle" data-bs-toggle="collapse"
-                data-bs-target="#kt_aside_categories_more">Fazla Göster</a>
-        </div>
-    </div>
     <!--end::Heading-->
 </template>
 <script setup>
