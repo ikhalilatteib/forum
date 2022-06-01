@@ -101,6 +101,11 @@ function register(ev) {
         router.push({
             name: "Dashboard",
         });
+    }).catch((err) => {
+      loading.value = false;
+      if (err.response.status === 422) {
+        errorMsg.value = err.response.data.errors;
+      }
     });
 }
 </script>
